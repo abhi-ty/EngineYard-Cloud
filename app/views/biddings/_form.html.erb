@@ -1,0 +1,24 @@
+<%= form_for(@bidding) do |f| %>
+  <% if @bidding.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bidding.errors.count, "error") %> prohibited this bidding from being saved:</h2>
+
+      <ul>
+      <% @bidding.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <p>
+      <B> Item:</B>
+      <%= @item.id %>
+    </p>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.number_field :price %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

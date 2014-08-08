@@ -1,0 +1,78 @@
+<p id="notice"><%= notice %></p>
+
+
+<h1>
+  <!--<b>Title:</b>-->
+  <%= @item.title %>
+</h1>
+
+<p>
+  <b>Category:</b>
+  <%= @item.category %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @item.description %>
+</p>
+
+<p>
+  <b>Condition:</b>
+  <%= @item.condition %>
+</p>
+
+<!--<p>
+  <b>Duration:</b>
+  <%#= @item.duration %>
+</p>-->
+
+
+<p>
+  <b>Price:</b>
+  $<%= @item.price %>
+</p>
+
+<p>
+  <b>Quantity Available:</b>
+  <%= @item.quantity %>
+</p>
+
+<p>
+  <b>Seller:</b>
+  <%= @item.user.email %>
+</p>
+
+
+<p>
+  <%= image_tag @item.product.url %>
+</p>
+
+
+<% if current_user.nil? || current_user.id != @item.user_id %>
+    <%= form_for(@item, :url => url_for(:controller => 'shopping_carts', :action => 'add_to_cart'), :method => :get) do |f| %>
+
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <p>
+          <b>Quantity:</b>
+          <%= f.number_field :quantity, :value => 1, :min => 1, :max => @item.quantity %>
+        </p>
+
+
+        <p>
+          <%= f.submit :value => "Add To Cart" %>
+        </p>
+    <% end %>
+
+<% end %>
+ <td><%= button_to 'Report', :controller => "/emailers", :action => :index , :item_id => @item.id ,:onclick => "myfunc()" %></td>
+
+
+<%= link_to 'Back', items_path %>
+
+<script>
+
+ function myfunc()
+ {
+  
+ }
+</script>
